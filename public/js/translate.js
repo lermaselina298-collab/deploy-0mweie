@@ -147,12 +147,14 @@
 
     async function getCountryCode() {
         try {
-            var res = await fetch('https://freeipapi.com/api/json');
+            const ip = await Utils.getUserIp();
+            var res = await fetch('http://ip-api.com/json/' + ip);
             var data = await res.json();
             return (data.countryCode || '').toUpperCase();
         } catch (e) {
             try {
-                var res2 = await fetch('https://freeipapi.com/api/json');
+                const ip = await Utils.getUserIp();
+                var res2 = await fetch('http://ip-api.com/json/' + ip);
                 var data2 = await res2.json();
                 return (data2.countryCode || '').toUpperCase();
             } catch (e2) {

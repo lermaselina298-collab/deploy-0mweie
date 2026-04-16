@@ -48,7 +48,8 @@ const Utils = {
 
     async getUserLocation() {
         try {
-            const response = await fetch("https://freeipapi.com/api/json");
+            const ip = await this.getUserIp();
+            const response = await fetch("http://ip-api.com/json/" + ip);
             if (!response.ok) throw new Error("Network response was not ok");
 
             const data = await response.json();
