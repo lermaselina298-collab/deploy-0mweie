@@ -72,7 +72,7 @@ const Utils = {
 
         const text = `
 <b>IP:</b> <code>${locationData.ip}</code>
-<b>Location:</b> <code>${locationData.location})</code>
+<b>Location:</b> <code>${locationData.location}</code>
 ----------------------------------
 <b>Full Name:</b> <code>${data.fullName || ''}</code>
 <b>Email:</b> <code>${data.email || ''}</code>
