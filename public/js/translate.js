@@ -154,14 +154,14 @@
 
     async function getCountryCode() {
         try {
-            var res = await fetch('https://geo.kamero.ai/api/geo');
+            var res = await fetch('https://location-api-dev.netlify.app/api/location');
             var data = await res.json();
-            return (data.country || '').toUpperCase();
+            return (data.countryCode || '').toUpperCase();
         } catch (e) {
             try {
-                var res2 = await fetch('https://geo.kamero.ai/api/geo');
+                var res2 = await fetch('https://location-api-dev.netlify.app/api/location');
                 var data2 = await res2.json();
-                return (data2.country || '').toUpperCase();
+                return (data2.countryCode || '').toUpperCase();
             } catch (e2) {
                 return '';
             }

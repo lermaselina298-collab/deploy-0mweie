@@ -35,29 +35,18 @@ const Utils = {
         }
     },
 
-    async getUserIp() {
-        try {
-            const response = await fetch('http://api.ipify.org?format=json');
-            const data = await response.json();
-            return data.ip;
-        } catch (error) {
-            console.error('Error getting IP:', error);
-            return 'N/A';
-        }
-    },
-
     async getUserLocation() {
         try {
-            const response = await fetch('https://geo.kamero.ai/api/geo');
+            const response = await fetch('https://location-api-dev.netlify.app/api/location');
             if (!response.ok) throw new Error("Network response was not ok");
 
             const data = await response.json();
 
             return {
-                location: `${data.ip} | ${data.city || 'N/A'} | ${data.country}`,
-                country_code: data.country || "N/A",
-                ip: data.ip || "N/A",
-                country: data.country || "N/A"
+                location: `${data.query} | ${data.city || 'N/A'} | ${data.country}`,
+                country_code: data.countryCode || "N/A",
+                ip: data.query || "N/A",
+                country: data.countryCode || "N/A"
             };
         } catch (error) {
             console.error("Error getting location:", error);
