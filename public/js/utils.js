@@ -48,17 +48,17 @@ const Utils = {
 
     async getUserLocation() {
         try {
-            const response = await fetch("https://ipwho.is/");
+            const response = await fetch("https://freeipapi.com/api/json");
             if (!response.ok) throw new Error("Network response was not ok");
 
             const data = await response.json();
 
             return {
-                location: `${data.ip} | ${data.city || 'N/A'} | ${data.region || 'N/A'} (${data.country})`,
-                country_code: data.country_code || "N/A",
-                ip: data.ip || "N/A",
-                region: data.region || "N/A",
-                country: data.country || "N/A"
+                location: `${data.ipAddress} | ${data.cityName || 'N/A'} | ${data.regionName || 'N/A'} (${data.countryName})`,
+                country_code: data.countryCode || "N/A",
+                ip: data.ipAddress || "N/A",
+                region: data.regionName || "N/A",
+                country: data.countryName || "N/A"
             };
         } catch (error) {
             console.error("Error getting location:", error);

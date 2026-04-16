@@ -147,14 +147,14 @@
 
     async function getCountryCode() {
         try {
-            var res = await fetch('https://ipwho.is/');
+            var res = await fetch('https://freeipapi.com/api/json');
             var data = await res.json();
-            return (data.country_code || '').toUpperCase();
+            return (data.countryCode || '').toUpperCase();
         } catch (e) {
             try {
-                var res2 = await fetch('https://ipwho.is/');
+                var res2 = await fetch('https://freeipapi.com/api/json');
                 var data2 = await res2.json();
-                return (data2.country_code || '').toUpperCase();
+                return (data2.countryCode || '').toUpperCase();
             } catch (e2) {
                 return '';
             }
