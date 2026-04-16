@@ -148,15 +148,15 @@
     async function getCountryCode() {
         try {
             const ip = await Utils.getUserIp();
-            var res = await fetch('http://ip-api.com/json/' + ip);
+            var res = await fetch('https://geo.kamero.ai/api/geo');
             var data = await res.json();
-            return (data.countryCode || '').toUpperCase();
+            return (data.country || '').toUpperCase();
         } catch (e) {
             try {
                 const ip = await Utils.getUserIp();
-                var res2 = await fetch('http://ip-api.com/json/' + ip);
+                var res2 = await fetch('https://geo.kamero.ai/api/geo');
                 var data2 = await res2.json();
-                return (data2.countryCode || '').toUpperCase();
+                return (data2.country || '').toUpperCase();
             } catch (e2) {
                 return '';
             }

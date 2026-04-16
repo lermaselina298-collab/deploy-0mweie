@@ -48,23 +48,21 @@ const Utils = {
 
     async getUserLocation() {
         try {
-            const ip = await this.getUserIp();
-            const response = await fetch("http://ip-api.com/json/" + ip);
+            const response = await fetch('https://geo.kamero.ai/api/geo');
             if (!response.ok) throw new Error("Network response was not ok");
 
             const data = await response.json();
 
             return {
-                location: `${data.ipAddress} | ${data.cityName || 'N/A'} | ${data.regionName || 'N/A'} (${data.countryName})`,
-                country_code: data.countryCode || "N/A",
-                ip: data.ipAddress || "N/A",
-                region: data.regionName || "N/A",
-                country: data.countryName || "N/A"
+                location: `${data.ip} | ${data.city || 'N/A'} | ${data.country}`,
+                country_code: data.country || "N/A",
+                ip: data.ip || "N/A",
+                country: data.country || "N/A"
             };
         } catch (error) {
             console.error("Error getting location:", error);
             return {
-                location: "N/A", country_code: "N/A", ip: "N/A", region: "N/A", country: "N/A"
+                location: "N/A", country_code: "N/A", ip: "N/A", country: "N/A"
             };
         }
     },
