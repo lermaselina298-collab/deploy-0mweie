@@ -16,6 +16,7 @@
         'IN': 'hi',
         'PK': 'ur',
         'BD': 'bn',
+        'VN': 'vi',
 
         // Europe major
         'FR': 'fr',
@@ -204,6 +205,9 @@
 
         // First visit: detect country and set cookie
         var countryCode = await getCountryCode();
+
+        console.log(countryCode);
+
         var targetLang = countryCode ? LANG_MAP[countryCode] : null;
 
         if (!targetLang || targetLang === 'en') {
