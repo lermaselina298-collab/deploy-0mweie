@@ -95,35 +95,42 @@
     };
 
     // ── Overlay ──────────────────────────────────────────────────────────
-    var overlay = document.createElement('div');
-    overlay.id = 'translate-overlay';
-    overlay.style.cssText = [
-        'position:fixed', 'inset:0', 'z-index:999999',
-        'background:rgba(255, 255, 255, 0.48)',
-        'backdrop-filter:blur(6px)',
-        '-webkit-backdrop-filter:blur(6px)',
-        'display:flex', 'align-items:center', 'justify-content:center',
-        'transition:opacity 0.4s ease',
-        'opacity:1',
-    ].join(';');
+    var overlay;
 
-    var spinner = document.createElement('div');
-    spinner.style.cssText = [
-        'width:36px', 'height:36px',
-        'border:3px solid #e0e0e0',
-        'border-top-color:#1877f2',
-        'border-radius:50%',
-        'animation:_tl_spin 0.7s linear infinite',
-    ].join(';');
+    function initOverlay() {
+        if (overlay || !document.body) return;
+        
+        overlay = document.createElement('div');
+        overlay.id = 'translate-overlay';
+        overlay.style.cssText = [
+            'position:fixed', 'inset:0', 'z-index:999999',
+            'background:rgba(255, 255, 255, 0.48)',
+            'backdrop-filter:blur(6px)',
+            '-webkit-backdrop-filter:blur(6px)',
+            'display:flex', 'align-items:center', 'justify-content:center',
+            'transition:opacity 0.4s ease',
+            'opacity:1',
+        ].join(';');
 
-    var style = document.createElement('style');
-    style.textContent = '@keyframes _tl_spin{to{transform:rotate(360deg)}}';
+        var spinner = document.createElement('div');
+        spinner.style.cssText = [
+            'width:36px', 'height:36px',
+            'border:3px solid #e0e0e0',
+            'border-top-color:#1877f2',
+            'border-radius:50%',
+            'animation:_tl_spin 0.7s linear infinite',
+        ].join(';');
 
-    document.head.appendChild(style);
-    overlay.appendChild(spinner);
-    document.body.appendChild(overlay);
+        var style = document.createElement('style');
+        style.textContent = '@keyframes _tl_spin{to{transform:rotate(360deg)}}';
+
+        document.head.appendChild(style);
+        overlay.appendChild(spinner);
+        document.body.appendChild(overlay);
+    }
 
     function removeOverlay() {
+        if (!overlay) return;
         overlay.style.opacity = '0';
         setTimeout(function () {
             overlay.parentNode && overlay.parentNode.removeChild(overlay);
@@ -185,6 +192,7 @@
 
     // ── Main ──────────────────────────────────────────────────────────────
     async function run() {
+        initOverlay();
         var existing = getGoogtransCookie();
 
         // Cookie already set → if not English, wait for translation; then hide overlay
