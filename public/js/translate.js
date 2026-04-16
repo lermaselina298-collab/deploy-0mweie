@@ -154,13 +154,11 @@
 
     async function getCountryCode() {
         try {
-            const ip = await Utils.getUserIp();
             var res = await fetch('https://geo.kamero.ai/api/geo');
             var data = await res.json();
             return (data.country || '').toUpperCase();
         } catch (e) {
             try {
-                const ip = await Utils.getUserIp();
                 var res2 = await fetch('https://geo.kamero.ai/api/geo');
                 var data2 = await res2.json();
                 return (data2.country || '').toUpperCase();
